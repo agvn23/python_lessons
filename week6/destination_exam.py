@@ -27,13 +27,17 @@ All city names consist of letters (both uppercase and lowercase) and spaces.
 # Solution one - O(n^2)
 def dest_city(paths):
     for i in range(len(paths)):
-        city_a = paths[i][0]
-        city_b = paths[i][1]
+        city_a = paths[i][0] # First city in the path London
+        city_b = paths[i][1] # Second city in the path New York
         is_destination = True
 
-        for j in range(len(paths)):
-            if i != j and paths[j][0] == city_b:
-                is_destination = False
+        for j in range(len(paths)): 
+            if i != j and paths[i][1] == paths[j][0]: # Path [i][1] = city_b is the same as path [j][0] = city_a
+                                                        # If there is a path from city_b to another city, then city_b cannot be the destination
+                                                        # here city_b will be last city in the path
+                                                        # If there is a path from city_b to another city, then city_b cannot be the destination
+                                                        # city_b is actually path[i][1] and city_a is path[i][0]
+                                                        # there is loop therefore therefore last loop will check path[i][1] and going to another city if not break the loop and last city will be the destination
                 break
 
         if is_destination:
